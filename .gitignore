@@ -1,0 +1,7 @@
+# Exclude extra.docx file
+extra.docx
+
+# General files to ignore
+.DS_Store
+*.tmp
+*.temp
