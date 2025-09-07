@@ -43,7 +43,7 @@ Assignment 1/
 
 1. **Clone the repository:**
    ```bash
-   git clone [your-repo-url]
+   git clone https://github.com/khushi-saxena/CS648.git
    ```
 
 2. **Open the project:**
@@ -70,13 +70,8 @@ Assignment 1/
 ## 👨‍💻 Author
 
 **Student Name**: Khushi Saxena  
-**Course**: CS648 - Web Programming  
-**Assignment**: 1  
-**Date**: December 2024
-
-## 📄 License
-
-This project is created for educational purposes as part of CS648 coursework.
+**Course**: CS648  
+**Assignment**: 1
 
 ---
 
