@@ -69,10 +69,10 @@ Assignment 1/
 
 ## 👨‍💻 Author
 
-**Student Name**: [Your Name]  
+**Student Name**: Khushi Saxena  
 **Course**: CS648 - Web Programming  
 **Assignment**: 1  
-**Date**: [Current Date]
+**Date**: December 2024
 
 ## 📄 License
 
