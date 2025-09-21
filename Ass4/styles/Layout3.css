@@ -1,0 +1,106 @@
+body {
+    width: 960px;
+    margin: 20px auto 20px auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 80px 400px 50px 250px 1fr;
+    grid-gap: 12px;
+    font-family: sans-serif;
+}
+
+header {
+    grid-row: 1/2;
+    grid-column: 1/5;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px;
+}
+
+footer {
+    grid-column: 1/5;
+    grid-row: 5/6;
+    display: grid;
+    align-self: center;
+    justify-content: center;
+    background-color: silver;
+
+}
+
+.logo {
+    grid-column: 1/2;
+    background-color: silver;
+}
+
+.navigation {
+    grid-column: 3/5;
+    grid-row: 1/2;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: 45px;
+    align-self: center;
+    grid-gap: 15px;
+    background-color: silver;
+}
+
+.navigation span {
+    align-self: center;
+    justify-self: center;
+}
+
+.section1 {
+    display: grid;
+    grid-column: 1/5;
+    grid-row: 2/3;
+    font-weight: bold;
+    padding: 30px;
+    align-self: center;
+    justify-content: center;
+    background-color: silver;
+}
+
+.section1 h1 {
+    font-size: 46px;
+}
+
+.section1 h4 {
+    font-size: 24px;
+}
+
+.section2 {
+    display: grid;
+    grid-column: 1/5;
+    grid-row: 3/4;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px;
+}
+
+.section2 div {
+    background-color: silver;
+}
+
+.title1 {
+    grid-column: 1/2;
+}
+
+.title2 {
+    grid-column: 3/4;
+}
+
+.section3 {
+    display: grid;
+    grid-column: 1/5;
+    grid-row: 4/5;
+
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 15px;
+}
+
+.section3 div {
+    background-color: silver;
+}
+
+.section3 div:nth-child(1),
+.section3 div:nth-child(4) {
+    grid-column: 1/3;
+}
