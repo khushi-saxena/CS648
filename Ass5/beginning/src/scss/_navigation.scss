@@ -1,0 +1,37 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+body {
+  font-family: $font-body; font-size: 1em; line-height: 2em;
+  background: url(#{$img-path}bg.gif) $color-white repeat-x; margin: 0;
+}
+
+main { width: $container; margin: 0 auto; padding: 0 10px;
+  @include break(lg) { width: 768px; }
+  @include break(md) { width: 460px; }
+  @include break(sm) { width: 300px; }
+}
+
+figure { @include sized(400px,190px); float: left;
+  background: url(#{$img-path}logo.png) no-repeat 0 50px; margin: 0;
+  @include break(lg) { width: inherit; height: 140px; float: none; background-position: center; }
+  @include break(sm) { background-size: contain; height: 100px; }
+}
+
+nav { width: 540px; height: 190px; float: left; text-align: right;
+  @include break(lg) { width: inherit; height: 50px; float: none; text-align: center; }
+  @include break(sm) { margin-bottom: 40px !important; }
+
+  ul { list-style: none; margin-top: 95px;
+    @include break(lg) { margin-top: 0; }
+
+    li { display: inline; font-size: .8em; margin-right: 10px;
+      @include break(lg) { font-size: 1em; margin: 0 10px; }
+      @include break(md) { font-size: .8em; margin: 0 5px; }
+
+      a { color: $color-primary; text-decoration: none; letter-spacing: -0.01em;
+        &:hover { color: $color-white; }
+      }
+    }
+  }
+}

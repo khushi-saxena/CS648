@@ -1,0 +1,285 @@
+// Import partials
+@import 'variables';
+@import 'mixins';
+@import 'navigation';
+
+// Basic styles
+body {
+  font-family: $font-family;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  background: url($bg-path) $white repeat-x;
+  margin: 0;
+}
+
+main {
+  @include box($container-width, auto, transparent, 0, 0 auto);
+  padding: 0 10px;
+}
+
+// Figure (logo) styles
+figure {
+  @include logo();
+}
+
+// Header styles
+header {
+  @include header();
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  h1 {
+    color: $primary-color;
+    font-weight: 100;
+    font-size: $xl-font-size;
+    line-height: 0;
+  }
+  
+  h2 {
+    color: $white;
+    font-weight: 900;
+    font-size: 2.5em;
+    line-height: 0;
+    margin-bottom: $xl-margin;
+  }
+  
+  h3 {
+    color: $text-color;
+    font-weight: 400;
+    font-size: $large-font-size;
+    line-height: 0;
+    margin-bottom: $large-margin;
+  }
+}
+
+// Content styles
+#headline {
+  @include box(100%, 130px, $secondary-color, 0, 0 auto);
+  text-align: center;
+  
+  h1 {
+    color: $white;
+    font-size: 2.5em;
+    font-weight: 100;
+    padding-top: $large-margin;
+  }
+}
+
+#content {
+  @include box($container-width, auto, transparent, 0, $base-margin auto);
+  
+  h3 {
+    color: $text-color;
+    font-size: $large-font-size;
+    font-weight: 400;
+  }
+  
+  #products {
+    @include content-area();
+    
+    img {
+      float: left;
+      margin-right: $base-margin;
+    }
+    
+    article {
+      margin-bottom: 40px;
+    }
+    
+    h4 {
+      line-height: $small-line-height;
+    }
+  }
+  
+  #testimonials {
+    @include content-area($content-width, right);
+  }
+}
+
+// Footer styles
+.greybar {
+  @include box(100%, 90px, $light-gray, 30px 0 0 0);
+  clear: both;
+}
+
+footer {
+  @include footer();
+  
+  .social-media {
+    margin: 0 auto;
+    width: 165px;
+    
+    div {
+      float: left;
+      margin-right: 5px;
+      
+      a {
+        display: block;
+        width: 36px;
+        height: 36px;
+        text-indent: -9999px;
+      }
+      
+      &.one {
+        background: url($social-media-path) 0 0;
+      }
+      
+      &.two {
+        background: url($social-media-path) -38px 0;
+      }
+      
+      &.three {
+        background: url($social-media-path) -76px 0;
+      }
+      
+      &.four {
+        background: url($social-media-path) -114px 0;
+      }
+    }
+  }
+}
+
+// Math operations - calculating responsive font sizes
+$base-responsive-size: 1em;
+$tablet-multiplier: 0.8;
+$mobile-multiplier: 0.6;
+
+// Tablet media queries
+@include break(tablet) {
+  main {
+    width: 768px;
+  }
+  
+  figure {
+    width: inherit;
+    height: 140px;
+    float: none;
+    background-position: center;
+  }
+  
+  header {
+    h1 {
+      font-size: 3em; // Math operation: $xl-font-size * 0.75
+    }
+    
+    h2 {
+      font-size: 1.5em; // Math operation: 2.5em * 0.6
+    }
+  }
+  
+  #content {
+    width: inherit;
+    
+    #products,
+    #testimonials {
+      width: 46%; // Math operation: 50% - 4%
+      margin: 0 2%;
+    }
+  }
+}
+
+// Mobile media queries
+@include break(mobile) {
+  main {
+    width: 460px;
+  }
+  
+  header {
+    h1 {
+      font-size: 2em; // Math operation: $xl-font-size * 0.5
+    }
+    
+    h2 {
+      font-size: 1em; // Math operation: 2.5em * 0.4
+    }
+    
+    img {
+      margin-bottom: 100px;
+    }
+    
+    h3 {
+      font-size: 1.5em; // Math operation: $large-font-size * 0.75
+    }
+  }
+  
+  #headline h1 {
+    font-size: 2em; // Math operation: 2.5em * 0.8
+    padding-top: $large-margin;
+  }
+  
+  #content {
+    #products,
+    #testimonials {
+      width: 96%; // Math operation: 100% - 4%
+      margin: 0 2%;
+      float: none;
+    }
+  }
+}
+
+// Small mobile media queries
+@include break(small-mobile) {
+  main {
+    width: 300px;
+  }
+  
+  figure {
+    background-size: contain;
+    height: 100px;
+  }
+  
+  nav {
+    margin-bottom: 40px !important;
+  }
+  
+  select {
+    width: 95%; // Math operation: 100% - 5%
+  }
+  
+  #headline h1 {
+    font-size: 1.5em; // Math operation: 2.5em * 0.6
+    padding-top: 30px;
+  }
+  
+  header {
+    img {
+      margin-bottom: 80px;
+    }
+    
+    h1:first-child {
+      font-size: 1.4em; // Math operation: $xl-font-size * 0.35
+      margin-bottom: $base-margin;
+    }
+    
+    h2 {
+      font-size: 1.4em; // Math operation: 2.5em * 0.56
+    }
+    
+    h3 {
+      color: $white;
+      font-size: 1em; // Math operation: $large-font-size * 0.5
+    }
+  }
+  
+  #content h3 {
+    font-size: 1.6em; // Math operation: $large-font-size * 0.8
+  }
+  
+  .greybar,
+  article img {
+    display: none;
+  }
+  
+  footer {
+    text-align: center;
+    
+    p,
+    img {
+      float: none;
+      margin: 0;
+    }
+  }
+}

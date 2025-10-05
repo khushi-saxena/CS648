@@ -1,0 +1,28 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+header {
+  width: inherit; clear: both; text-align: center; padding-top: 40px;
+
+  img { max-width: 100%; height: auto;
+    @include break(md) { margin-bottom: 100px; }
+    @include break(sm) { margin-bottom: 80px; }
+  }
+
+  h1 { color: $color-primary; @include font-scale(4em, 100, 0);
+    @include break(lg) { font-size: 3em; }
+    @include break(md) { font-size: 2em; }
+    @include break(sm) { &:first-child { font-size: 1.4em; margin-bottom: 20px; } } // note: &:first-child (no space)
+  }
+
+  h2 { color: $color-white; @include font-scale(2.5em, 900, 0); margin-bottom: 70px;
+    @include break(lg) { font-size: 1.5em; }
+    @include break(md) { font-size: 1em; }
+    @include break(sm) { font-size: 1.4em; }
+  }
+
+  h3 { color: $color-gray-666; @include font-scale(2em, 400, 0); margin-bottom: 50px;
+    @include break(md) { font-size: 1.5em; }
+    @include break(sm) { color: $color-white; font-size: 1em; }
+  }
+}

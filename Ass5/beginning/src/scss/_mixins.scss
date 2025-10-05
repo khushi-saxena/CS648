@@ -1,0 +1,19 @@
+@use 'sass:map';
+
+@mixin box($pad: 1rem, $bg: $color-white, $radius: .5rem) {
+  padding: $pad; background: $bg; border-radius: $radius;
+}
+
+@mixin font-scale($size: 1rem, $weight: 400, $line: 1.5) {
+  font-size: $size; font-weight: $weight; line-height: $line;
+}
+
+@mixin sized($w: auto, $h: auto, $display: block) {
+  width: $w; height: $h; display: $display;
+}
+
+$breakpoints: ( lg: 959px, md: 767px, sm: 459px );
+
+@mixin break($key) {
+  @media screen and (max-width: map.get($breakpoints, $key)) { @content; }
+}

@@ -1,0 +1,33 @@
+@use 'sass:math';
+@use './variables' as *;
+@use './mixins' as *;
+
+#headline { width:100%; height:130px; background:$color-headline; text-align:center; margin:0 auto;
+  h1 { color:$color-white; @include font-scale(2.5em,100); padding-top:50px;
+    @include break(md) { font-size:2em; padding-top:50px; }
+    @include break(sm) { font-size:1.5em; padding-top:30px; }
+  }
+}
+
+#content { width: $container; margin: 20px auto;
+  @include break(lg) { width: inherit; }
+
+  h3 { color:$color-gray-666; @include font-scale(2em,400);
+    @include break(sm) { font-size:1.6em; }
+  }
+
+  $gutter: 20px;
+  #products      { width: math.div($container,2) - $gutter; float:left;
+    img { float:left; margin-right:20px; }
+    article { margin-bottom:40px; }
+    h4 { line-height:1em; }
+  }
+  #testimonials  { width: math.div($container,2) - $gutter; float:right; }
+
+  @include break(lg) {
+    > #products, > #testimonials { width:46%; margin:0 2%; }
+  }
+  @include break(md) {
+    > #products, > #testimonials { width:96%; float:none; margin:0 2%; }
+  }
+}
