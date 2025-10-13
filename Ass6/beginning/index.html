@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS648 Assignment 6 - JavaScript Conditional Logic and Looping Problems</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .problem {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .problem h2 {
+            color: #007bff;
+            margin-top: 0;
+        }
+        .problem p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .instructions {
+            background-color: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .note {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CS648 Assignment 6</h1>
+        <h2>JavaScript Conditional Logic and Looping Problems</h2>
+        
+        <div class="instructions">
+            <h3>Instructions:</h3>
+            <p>Click the buttons below to run each problem individually. Make sure to open the browser's developer console (F12) to see the output for problems that use console.log().</p>
+        </div>
+
+        <div class="problem">
+            <h2>1. Larger or Smaller (5 points)</h2>
+            <p>Create an application that accepts two integers within two separate prompts. Then, display only the larger of the two within the browser window.</p>
+            <button onclick="runProblem1()">Run Problem 1</button>
+        </div>
+
+        <div class="problem">
+            <h2>2. The "Coin Flip" Game (10 points)</h2>
+            <p>Interactive coin flip game where you select "Heads" or "Tails" and see if you win or lose!</p>
+            <button onclick="runProblem2()">Run Problem 2</button>
+        </div>
+
+        <div class="problem">
+            <h2>3. The "Coin Flip" Game Redux (10 points)</h2>
+            <p>Coin flip game using a for loop that runs 10 times. Check the console for output.</p>
+            <button onclick="runProblem3()">Run Problem 3</button>
+        </div>
+
+        <div class="problem">
+            <h2>4. The "Coin Flip Streak" Game (5 points)</h2>
+            <p>See how many "Heads" you can get in a row! Check the console for output.</p>
+            <button onclick="runProblem4()">Run Problem 4</button>
+        </div>
+
+        <div class="problem">
+            <h2>5. Looping a Triangle (5 points)</h2>
+            <p>Display a triangle pattern using loops. Check the console for output.</p>
+            <button onclick="runProblem5()">Run Problem 5</button>
+        </div>
+
+        <div class="problem">
+            <h2>6. Odd or Even? (5 points)</h2>
+            <p>Check if numbers from 0 to 15 are odd or even. Check the console for output.</p>
+            <button onclick="runProblem6()">Run Problem 6</button>
+        </div>
+
+        <div class="problem">
+            <h2>7. Marco! Polo! (5 points)</h2>
+            <p>FizzBuzz-style problem with "Marco!" and "Polo!". Check the console for output.</p>
+            <button onclick="runProblem7()">Run Problem 7</button>
+        </div>
+
+        <div class="problem">
+            <h2>8. Countdown (5 points)</h2>
+            <p>Count down from a user-entered number to 0. Check the console for output.</p>
+            <button onclick="runProblem8()">Run Problem 8</button>
+        </div>
+
+        <div class="note">
+            <strong>Note:</strong> To see the console output for problems 3-8, open the browser's developer tools (F12) and go to the Console tab.
+        </div>
+    </div>
+
+    <script>
+        function runProblem1() {
+            let firstNumber = parseInt(prompt("Enter the first integer:"));
+
+            let secondNumber = parseInt(prompt("Enter the second integer:"));
+
+            if (isNaN(firstNumber) || isNaN(secondNumber)) {
+                document.write("<h2>Error: Please enter valid integers only.</h2>");
+            } else {
+                if (firstNumber > secondNumber) {
+                    document.write(`<h2>The larger number is: ${firstNumber}</h2>`);
+                } else if (secondNumber > firstNumber) {
+                    document.write(`<h2>The larger number is: ${secondNumber}</h2>`);
+                } else {
+                    document.write(`<h2>Both numbers are equal: ${firstNumber}</h2>`);
+                }
+            }
+        }
+
+        function runProblem2() {
+            let coinFlip = Math.random();
+
+            let choice = prompt("Select 'Heads' or 'Tails':").toLowerCase();
+
+            let coinResult = Math.round(Math.random());
+
+            let isTails = Boolean(coinResult);
+
+            if (!isTails && choice === "heads") {
+                alert("The flip was heads and you chose heads...you win!");
+            } else if (!isTails && choice === "tails") {
+                alert("The flip was heads but you chose tails...you lose!");
+            } else if (isTails && choice === "heads") {
+                alert("The flip was tails but you chose heads...you lose!");
+            } else if (isTails && choice === "tails") {
+                alert("The flip was tails and you chose tails...you win!");
+            } else {
+                alert("Invalid choice. Please enter 'Heads' or 'Tails'.");
+            }
+        }
+
+        function runProblem3() {
+            console.log("=== Coin Flip Redux (10 flips) ===");
+            let coinFlip;
+
+            for (let i = 0; i < 10; i++) {
+                coinFlip = Math.round(Math.random());
+                
+                if (coinFlip === 0) {
+                    console.log("Heads");
+                } else if (coinFlip === 1) {
+                    console.log("Tails");
+                }
+            }
+        }
+
+        function runProblem4() {
+            console.log("=== Coin Flip Streak Game ===");
+            let coinFlip;
+
+            do {
+                coinFlip = Math.round(Math.random());
+                
+                if (coinFlip === 0) {
+                    console.log("Heads");
+                } else if (coinFlip === 1) {
+                    console.log("Tails");
+                }
+                
+            } while (coinFlip === 0);
+        }
+
+        function runProblem5() {
+            console.log("=== Triangle Pattern ===");
+            for (let i = 1; i <= 7; i++) {
+                let line = "";
+                for (let j = 0; j < i; j++) {
+                    line += "#";
+                }
+                console.log(line);
+            }
+        }
+
+        function runProblem6() {
+            console.log("=== Odd or Even Check ===");
+            for (let i = 0; i <= 15; i++) {
+                if (i % 2 === 0) {
+                    console.log(`${i} is even`);
+                } else {
+                    console.log(`${i} is odd`);
+                }
+            }
+        }
+
+        function runProblem7() {
+            console.log("=== Marco! Polo! Game ===");
+            for (let i = 1; i <= 100; i++) {
+                if (i % 3 === 0 && i % 5 === 0) {
+                    console.log("Marco! Polo!");
+                }
+                else if (i % 3 === 0) {
+                    console.log("Marco!");
+                }
+                else if (i % 5 === 0) {
+                    console.log("Polo!");
+                }
+                else {
+                    console.log(i);
+                }
+            }
+        }
+
+        function runProblem8() {
+            console.log("=== Countdown Game ===");
+            let userNumber = parseInt(prompt("Enter a number for countdown:"));
+
+            if (isNaN(userNumber) || userNumber < 0) {
+                console.log("Please enter a valid positive number.");
+            } else {
+                for (let i = userNumber; i >= 0; i--) {
+                    console.log(i);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
