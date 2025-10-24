@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS648 Assignment 8 - Employee Management System</title>
+    <script src="js/employee-management.js"></script>
+    <style>
+        .errorMsg {
+            color: #FF0000;
+            font-weight: bold;
+        }
+        
+        table {
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>The Employee Management Application</h3>
+
+    <div><b>Add Employee</b></div>
+    <br>
+    <form id="employeeForm" onsubmit="return false">
+        <table>
+            <tr>
+                <td><label for="employeeName">Name: </label></td>
+                <td><input type="text" name="employeeName" id="employeeName" placeholder="Enter employee name" /></td>
+                <td><span id="nameError" class="errorMsg"></span></td>
+            </tr>
+            <tr>
+                <td><label for="title">Title: </label></td>
+                <td><input type="text" name="title" id="title" placeholder="Enter job title" /></td>
+                <td><span id="titleError" class="errorMsg"></span></td>
+            </tr>
+            <tr>
+                <td><label for="extension">Extension: </label></td>
+                <td><input type="text" name="extension" id="extension" placeholder="Enter extension number" /></td>
+                <td><span id="extensionError" class="errorMsg"></span></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button id="addButton" type="button">Add Employee</button></td>
+            </tr>
+        </table>
+    </form>
+    
+    <br>
+    <div id="employeeCount"></div>
+    
+    <br>
+    <table id="employeeTable" border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Title</th>
+                <th>Extension</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</body>
+
+</html>
