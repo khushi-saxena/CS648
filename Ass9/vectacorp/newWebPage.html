@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>New Web Page</title>
+		<script src="scripts/jquery-3.6.1.min.js"></script>
+		<script>
+			$(function() {
+				$("#button1").click(function() {
+					alert("Button 1 was clicked.");
+				});
+
+				$("#button2").bind("click", function() {
+					alert("Button 2 was clicked.");
+				});
+
+				$("#button3").on("click", function() {
+					alert("Button 3 was clicked.");
+				});
+
+				$("#pairButton1, #pairButton2").on("click", function() {
+					alert("Pair Button have been clicked.");
+				});
+
+				$("#div1")
+				.css("width", "400px")
+				.css("height", "400px")
+				.css("border", "1px solid #000000");
+				$("#div1").on("click", function() {
+					alert("Div 1 was clicked");
+				});
+				$("#div1").on("mouseenter", function() {
+					alert("Mouse entered Div 1.");
+				});
+				$("#div1").on("mouseleave", function() {
+					alert("Mouse left Div 1.");
+				});
+
+				$("#span1").css("display", "block").css("width", "400px").css("height", "30px").css("background", "#F0F0F0");
+				$("#div1").on("click", function() {
+					$('#span1').html('Div 1 was clicked');
+				});
+				$("#div1").on("mouseenter", function() {
+					$('#span1').html('Mouse Entered Div 1');
+				});
+				$("#div1").on("mouseleave", function() {
+					$('#span1').html('Mouse Left Div 1');
+				});
+
+				$("#modulemediaLink").on("click", function (e) {
+					e.preventDefault();
+					$(this).css("color", "red");
+					alert(e.target.nodeName);
+				});
+
+				$(window).resize(function() {
+					$("#div2").text("Width: " + $(window).width() + " | Heigth: " + $(window).height());
+				});
+
+				$("#randomText").on({
+					focus: function() {
+						$(this).css("background", "#EDEDED");
+					},
+					blur: function() {
+						$(this).css("background", "#FFFFFF");
+					}
+				});
+
+				$("#form1").on("submit", function (e) {
+					const name = $("#fullname").val().trim();
+					const email = $("#email").val().trim();
+					let ok = true;
+
+					if (!name) { $("#fullname").css("border","1px solid red"); ok = false; }
+					else { $("#fullname").css("border","1px solid green"); }
+
+					if (!email) { $("#email").css("border","1px solid red"); ok = false; }
+					else { $("#email").css("border","1px solid green"); }
+
+					if (!ok) {
+						alert("Both name and email are required.");
+						e.preventDefault();
+					}
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<button id="button1">Button 1</button><br/><br/>
+		<button id="button2">Button 2</button><br/><br/>
+		<button id="button3">Button 3</button><br/><br/>
+		<button id="pairButton1">Pair Button 1</button><br/><br/>
+		<button id="pairButton2">Pair Button 2</button><br/><br/>
+		<div id="div1">Div 1</div><br/>
+		<span id="span1"></span><br/><br/>
+		<a href="http://www.modulemedia.com" id="modulemediaLink">Visit Module Media</a><br/><br/>
+		<div id="div2" style="position: fixed;top: 0px;left: 100px;background-color: aliceblue;padding: 5px;"></div>
+		<input type="text" name="randomText" id="randomText" /><br/><br/>
+		<form  id="form1" action="#" method="post">
+			Fullname: <input type="text" id="fullname" name="name"><br><br>
+			Email: <input type="text" id="email" name="email"><br><br>
+			<input type="submit" value="Submit">
+		</form>
+	</body>
+</html>
