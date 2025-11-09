@@ -1,7 +1,7 @@
-# Exclude extra.docx file
-extra.docx
-
-# General files to ignore
 .DS_Store
-*.tmp
-*.temp
+*.DS_Store
+desktop.ini
+Thumbs.db
+*.log
+node_modules/
+
