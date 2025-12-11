@@ -44,7 +44,16 @@ class ProductForm extends Component {
 
   handleSave(e) {
     e.preventDefault();
-    this.props.onSave(this.state.product);
+    // Convert productid and price to numbers before saving
+    const productToSave = {
+      ...this.state.product,
+      product: {
+        ...this.state.product.product,
+        productid: this.state.product.product.productid === '' ? 0 : Number(this.state.product.product.productid),
+        price: this.state.product.product.price === '' ? 0 : Number(this.state.product.product.price),
+      },
+    };
+    this.props.onSave(productToSave);
   }
 
   render() {

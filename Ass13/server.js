@@ -1,9 +1,20 @@
+// Load environment variables from .env file
+require('dotenv').config();
+
 var mongoose = require('mongoose');
 var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 
-var dbURL = "mongodb+srv://rucha:admin@cluster0.oe8znnp.mongodb.net/inventory?retryWrites=true&w=majority&appName=Cluster0";
+// Use environment variable for MongoDB connection string
+// Set MONGODB_URI in your .env file or environment
+var dbURL = process.env.MONGODB_URI;
+
+if (!dbURL) {
+  console.error('ERROR: MONGODB_URI environment variable is not set!');
+  console.error('Please create a .env file with your MongoDB connection string.');
+  process.exit(1);
+}
 
 var app = express();
 
@@ -47,9 +58,36 @@ app.get("/product/get", async (req, res) => {
   }
 });
 
+// GET ALL PRODUCTS (with trailing slash for assignment requirement)
+app.get("/product/get/", async (req, res) => {
+  try {
+    const products = await Product.find({});
+    res.json(buildProductMap(products));
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch products" });
+  }
+});
+
 // CREATE PRODUCT
 app.post("/product/create", async (req, res) => {
   try {
+    // Generate ID if not provided (handles undefined, null, empty string, but allows 0)
+    if (req.body.id === undefined || req.body.id === null || req.body.id === '') {
+      const products = await Product.find({});
+      const maxId = products.length > 0 
+        ? Math.max(...products.map(p => p.id || 0))
+        : -1;
+      req.body.id = maxId + 1;
+    }
+    
+    // Ensure numeric types
+    if (req.body.product) {
+      req.body.product.productid = Number(req.body.product.productid) || 0;
+      req.body.product.price = Number(req.body.product.price) || 0;
+      req.body.product.instock = Boolean(req.body.product.instock);
+    }
+    
     const newProduct = new Product(req.body);
     await newProduct.save();
     const products = await Product.find({});
@@ -63,7 +101,16 @@ app.post("/product/create", async (req, res) => {
 // UPDATE PRODUCT
 app.put("/product/update/:id", async (req, res) => {
   try {
-    await Product.updateOne({ id: req.params.id }, req.body);
+    const productId = Number(req.params.id);
+    
+    // Ensure numeric types
+    if (req.body.product) {
+      req.body.product.productid = Number(req.body.product.productid) || 0;
+      req.body.product.price = Number(req.body.product.price) || 0;
+      req.body.product.instock = Boolean(req.body.product.instock);
+    }
+    
+    await Product.updateOne({ id: productId }, { $set: req.body });
     const products = await Product.find({});
     res.json(buildProductMap(products));
   } catch (err) {
@@ -75,7 +122,8 @@ app.put("/product/update/:id", async (req, res) => {
 // DELETE PRODUCT
 app.delete("/product/delete/:id", async (req, res) => {
   try {
-    await Product.deleteOne({ id: req.params.id });
+    const productId = Number(req.params.id);
+    await Product.deleteOne({ id: productId });
     const products = await Product.find({});
     res.json(buildProductMap(products));
   } catch (err) {
