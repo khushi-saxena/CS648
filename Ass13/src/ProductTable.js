@@ -19,7 +19,7 @@ class ProductTable extends Component {
   render() {
     let productsArray = Object.keys(this.props.products)
       .map((pid) => this.props.products[pid])
-      .filter((p) => p && p.product); // prevent undefined crash
+      .filter((p) => p && p.product);
 
     let rows = [];
 

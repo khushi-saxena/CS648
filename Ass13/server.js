@@ -1,4 +1,3 @@
-// Load environment variables from .env file
 require('dotenv').config();
 
 var mongoose = require('mongoose');
@@ -6,8 +5,6 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 
-// Use environment variable for MongoDB connection string
-// Set MONGODB_URI in your .env file or environment
 var dbURL = process.env.MONGODB_URI;
 
 if (!dbURL) {
@@ -22,13 +19,11 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Connect to MongoDB
 mongoose.set("strictQuery", false);
 mongoose.connect(dbURL)
   .then(() => console.log("MongoDB connected"))
   .catch((error) => console.error("Error connecting to MongoDB:", error));
 
-// Product Model
 var Product = mongoose.model("product", {
   id: Number,
   product: {
@@ -40,14 +35,12 @@ var Product = mongoose.model("product", {
   },
 });
 
-// Helper: Convert Array → Object keyed by id
 function buildProductMap(products) {
   const map = {};
   products.forEach((p) => (map[p.id] = p));
   return map;
 }
 
-// GET ALL PRODUCTS
 app.get("/product/get", async (req, res) => {
   try {
     const products = await Product.find({});
@@ -58,7 +51,6 @@ app.get("/product/get", async (req, res) => {
   }
 });
 
-// GET ALL PRODUCTS (with trailing slash for assignment requirement)
 app.get("/product/get/", async (req, res) => {
   try {
     const products = await Product.find({});
@@ -69,10 +61,8 @@ app.get("/product/get/", async (req, res) => {
   }
 });
 
-// CREATE PRODUCT
 app.post("/product/create", async (req, res) => {
   try {
-    // Generate ID if not provided (handles undefined, null, empty string, but allows 0)
     if (req.body.id === undefined || req.body.id === null || req.body.id === '') {
       const products = await Product.find({});
       const maxId = products.length > 0 
@@ -81,7 +71,6 @@ app.post("/product/create", async (req, res) => {
       req.body.id = maxId + 1;
     }
     
-    // Ensure numeric types
     if (req.body.product) {
       req.body.product.productid = Number(req.body.product.productid) || 0;
       req.body.product.price = Number(req.body.product.price) || 0;
@@ -98,12 +87,10 @@ app.post("/product/create", async (req, res) => {
   }
 });
 
-// UPDATE PRODUCT
 app.put("/product/update/:id", async (req, res) => {
   try {
     const productId = Number(req.params.id);
     
-    // Ensure numeric types
     if (req.body.product) {
       req.body.product.productid = Number(req.body.product.productid) || 0;
       req.body.product.price = Number(req.body.product.price) || 0;
@@ -119,7 +106,6 @@ app.put("/product/update/:id", async (req, res) => {
   }
 });
 
-// DELETE PRODUCT
 app.delete("/product/delete/:id", async (req, res) => {
   try {
     const productId = Number(req.params.id);
@@ -132,7 +118,7 @@ app.delete("/product/delete/:id", async (req, res) => {
   }
 });
 
-// Start ONLY ONE server
-var server = app.listen(3003, () => {
+var port = process.env.PORT || 3003;
+var server = app.listen(port, () => {
   console.log("Server is listening on port:", server.address().port);
 });

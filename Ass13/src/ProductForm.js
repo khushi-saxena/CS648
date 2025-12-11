@@ -44,7 +44,6 @@ class ProductForm extends Component {
 
   handleSave(e) {
     e.preventDefault();
-    // Convert productid and price to numbers before saving
     const productToSave = {
       ...this.state.product,
       product: {
